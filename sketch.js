@@ -4,7 +4,7 @@ let yBolinha = 200;
 let diametro = 15;
 let raio = diametro / 2;
 
-// Velocidade da Bolinha 
+// Velocidade da Bolinha
 let velocidadeXBolinha = 6;
 let velocidadeYBolinha = 6;
 
@@ -32,13 +32,13 @@ let raquetada;
 let ponto;
 
 // Chance de Erro do Oponente
-let chancedeErrar = 0;
+let chanceDeErrar = 0;
 
-// Variável de Pausa 
+// Variável de Pausa
 let pausa = false;
 
 function preload() {
-  trilha = loadSound("raquetada.mp3");
+  trilha = loadSound("trilha.mp3");
   raquetada = loadSound("raquetada.mp3");
   ponto = loadSound("ponto.mp3");
 }
@@ -57,7 +57,7 @@ function draw() {
   mostraRaquete(xRaquete, yRaquete);
   movimentaMinhaRaquete();
   verificaColisaoRaquete(xRaquete, yRaquete);
-  verificaColisaoRaquete(xRaqueteOponente, yRaqueteOponente); 
+  verificaColisaoRaquete(xRaqueteOponente, yRaqueteOponente);
   mostraRaquete(xRaqueteOponente, yRaqueteOponente);
   movimentaRaqueteOponente();
   incluiPlacar();
@@ -65,94 +65,94 @@ function draw() {
 }
 
 function mostraBolinha() {
-   circle(xBolinha, yBolinha, diametro);
+  circle(xBolinha, yBolinha, diametro);
 }
 
-function movimentaBolinha(){
-  if(!pausa){
+function movimentaBolinha() {
+  if (!pausa) {
     xBolinha += velocidadeXBolinha;
     yBolinha += velocidadeYBolinha;
   }
 }
 
-function verificaColisaoBorda(){
- if (xBolinha + raio > width || xBolinha - raio < 0){
-   velocidadeXBolinha *= -1;
+function verificaColisaoBorda() {
+  if (xBolinha + raio > width || xBolinha - raio < 0) {
+    velocidadeXBolinha *= -1;
   }
 
-if (yBolinha + raio > height || yBolinha - raio < 0) {
-   velocidadeYBolinha *= -1;
+  if (yBolinha + raio > height || yBolinha - raio < 0) {
+    velocidadeYBolinha *= -1;
   }
 }
 
-function mostraRaquete(x,y) {
+function mostraRaquete(x, y) {
   rect(x, y, raqueteComprimento, raqueteAltura);
- }
+}
 
 function movimentaMinhaRaquete() {
   if (keyIsDown(87) && yRaquete > 5) {
-   yRaquete -= 10; 
+    yRaquete -= 10;
   }
- if (keyIsDown(83) && yRaquete < 305) {
-   yRaquete += 10;
- }
+  if (keyIsDown(83) && yRaquete < 305) {
+    yRaquete += 10;
+  }
 }
 
 function verificaColisaoRaquete(x, y) {
-  colidiu = collideRectCircle(x, y, raqueteComprimento, raqueteAltura, xBolinha, yBolinha, raio) ;                             
- if (colidiu) {
-   velocidadeXBolinha *= -1;  
-   raquetada.play();
-  }  
+  colidiu = collideRectCircle(x, y, raqueteComprimento, raqueteAltura, xBolinha, yBolinha, raio);
+  if (colidiu) {
+    velocidadeXBolinha *= -1;
+    raquetada.play();
+  }
 }
 
 function movimentaRaqueteOponente() {
  if (keyIsDown(UP_ARROW) && yRaqueteOponente > 5) {
-   yRaqueteOponente -= 10;
- } 
-if (keyIsDown(DOWN_ARROW) && yRaqueteOponente < 305) {
-  yRaqueteOponente += 10;
- }
+    yRaqueteOponente -= 10;
+  }
+  if (keyIsDown(DOWN_ARROW) && yRaqueteOponente < 305) {
+    yRaqueteOponente += 10;
+  }
 }
 
 function incluiPlacar() {
- stroke(255); 
+  stroke(255);
   textAlign(CENTER);
   textSize(16);
   fill('DarkOrange');
   rect(150, 10, 40, 20);
   fill(255);
-  text(meusPontos, 170, 20);
+  text(meusPontos, 170, 26);
   fill('DarkOrange');
   rect(450, 10, 40, 20);
   fill(255);
   text(pontosDoOponente, 470, 26);
 }
 
-function marcaPonto(){
+function marcaPonto() {
   if (xBolinha > 590) {
-  meusPontos += 1;
+    meusPontos += 1;
     ponto.play();
     iniciarJogoComPausa();
-  } 
-   if (xBolinha < 10) {
-   pontosDoOponente += 1;
-   ponto.play();
-   iniciarJogoComPausa();
-   }
+  }
+  if (xBolinha < 10) {
+    pontosDoOponente += 1;
+    ponto.play();
+    iniciarJogoComPausa();
+  }
 }
 
 function iniciarJogoComPausa() {
-  pause = true;
+  pausa = true;
   xBolinha = width / 2;
   yBolinha = height / 2;
   velocidadeXBolinha = 0;
   velocidadeYBolinha = 0;
-  
-setTimeout(() => {
-  pausa = false;
-  velocidadeXBolinha = 6 * (Math.random() > 0.5 ? 1 : -1); // Direção aleatória
-  velocidadeYBolinha = 6 * (Math.random() > 0.5 ? 1 : -1); // Direção aleatória
+
+  setTimeout(() => {
+    pausa = false;
+    velocidadeXBolinha = 6 * (Math.random() > 0.5 ? 1 : -1); // Direção aleatória
+    velocidadeYBolinha = 6 * (Math.random() > 0.5 ? 1 : -1); // Direção aleatória
   }, 3000); // 3 segundos de pausa
 }
 

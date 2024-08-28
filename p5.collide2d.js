@@ -1,13 +1,4 @@
-/*
-Repo: https://github.com/bmoren/p5.collide2D/
-Created by http://benmoren.com
-Some functions and code modified version from http://www.jeffreythompson.org/collision-detection
-Version v0.7.3 | June 22, 2020
-CC BY-NC-SA 4.0
-*/
-
-
-console.log("### p5.collide v0.7.3 ###")
+console.log("Let's Pong")
 
 p5.prototype._collideDebug = false;
 
@@ -96,7 +87,7 @@ p5.prototype.collidePointEllipse = function (x, y, cx, cy, dx, dy) {
   var rx = dx/2, ry = dy/2;
   // Discarding the points outside the bounding box
   if (x > cx + rx || x < cx - rx ||y > cy + ry || y < cy - ry) {
-        return false;
+    return false;
   }
   // Compare the point to its equivalent on the ellipse
   var xx = x - cx, yy = y - cy;
@@ -519,3 +510,4 @@ p5.prototype.collidePointArc = function(px, py, ax, ay, arcRadius, arcHeading, a
 p5.prototype.collidePointArcVector = function(p1, a, arcRadius, arcHeading, arcAngle, buffer){
   return p5.prototype.collidePointArc(p1.x, p1.y, a.x, a.y, arcRadius, arcHeading, arcAngle, buffer);
 }
+
